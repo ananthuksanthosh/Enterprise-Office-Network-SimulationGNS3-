@@ -107,7 +107,7 @@ The full GNS3 project file is available via Google Drive:
 https://drive.google.com/file/d/1mlkhLAarYJyHyTNzjELdpsSS7sZZXd11/view?usp=sharing
 
 Reference link also available in:
-"project-files/project-link.txt"
+"project-files/link.txt"
 
 ---
 
