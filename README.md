@@ -1,4 +1,4 @@
-🏢 Enterprise Office Network Simulation (GNS3)
+#🏢 Enterprise Office Network Simulation (GNS3)
 
 A hands-on enterprise network simulation built using GNS3 and Cisco 7200 routers, designed to replicate a real-world office network environment. This project demonstrates key networking concepts including routing, NAT, DHCP, network segmentation, and firewall implementation using ACLs.
 
