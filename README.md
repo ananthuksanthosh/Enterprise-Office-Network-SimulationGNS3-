@@ -1,19 +1,15 @@
 🏢 Enterprise Office Network Simulation (GNS3)
 
-A hands-on enterprise network simulation built using GNS3 and Cisco 7200 routers, designed to replicate a real-world office network environment.
-This project demonstrates key networking concepts including routing, NAT, DHCP, network segmentation, and firewall implementation using ACLs.
-
----
+A hands-on enterprise network simulation built using GNS3 and Cisco 7200 routers, designed to replicate a real-world office network environment. This project demonstrates key networking concepts including routing, NAT, DHCP, network segmentation, and firewall implementation using ACLs.
 
 📌 Project Overview
 
-This project simulates a small enterprise infrastructure consisting of multiple internal departments and an external customer network.
-The primary goal is to ensure:
+This project simulates a small enterprise infrastructure consisting of multiple internal departments and an external customer network. The primary goal is to ensure:
 
-- Secure communication between internal networks
-- Controlled access to sensitive systems
-- Reliable internet connectivity using NAT
-- Efficient IP management using DHCP
+- Secure communication between internal networks  
+- Controlled access to sensitive systems  
+- Reliable internet connectivity using NAT  
+- Efficient IP management using DHCP  
 
 The design follows a simplified core-edge architecture, commonly used in real enterprise networks.
 
@@ -23,27 +19,50 @@ The design follows a simplified core-edge architecture, commonly used in real en
 
 The network is structured into different layers and functional components:
 
-- Core Router (CORE-RTR)
-  Handles internal routing between subnets and enforces firewall policies using ACLs
+- Core Router (CORE-RTR)  
+  Handles internal routing between subnets and enforces firewall policies using ACLs  
 
-- Edge Router (EDGE-RTR)
-  Acts as the gateway to external networks and provides internet access using NAT
+- Edge Router (EDGE-RTR)  
+  Acts as the gateway to external networks and provides internet access using NAT  
 
-- Core Switch (CORE-SW)
-  Connects all internal office devices and enables LAN communication
+- Core Switch (CORE-SW)  
+  Connects all internal office devices and enables LAN communication  
 
-- Office Network
-  Includes departmental systems such as:
-  
-  - HR
-  - IT
-  - Finance
+- Office Network  
+  Represents internal user systems  
 
-- Admin Network
-  A highly secure subnet with restricted inbound access
+- Admin Network  
+  A highly secure subnet with restricted inbound access  
 
-- Customer Network
-  A dynamic network where devices receive IP addresses using DHCP
+- Customer Network  
+  A dynamic network where devices receive IP addresses using DHCP  
+
+---
+
+📷 Network Topology
+
+The following diagram represents the overall network structure, including core, edge, and segmented networks.
+
+![Topology](screenshots/topology.png)
+
+---
+
+🔄 Data Flow
+
+The communication flow in the network is as follows:
+
+Office Users  
+PC → Core Switch → Core Router → Edge Router → Internet  
+
+Customer Users  
+Device → Switch → Edge Router → Internet  
+
+Admin Network  
+Admin → Core Router → All Networks  
+
+Firewall Behavior  
+- Office/Customer → Admin ❌ Blocked  
+- Admin → All Networks ✅ Allowed  
 
 ---
 
@@ -54,43 +73,15 @@ The network is divided into logical subnets for scalability and security.
 | Network            | Subnet              | Description                         |
 |------------------|--------------------|-------------------------------------|
 | Core ↔ Edge Link | 10.0.0.0/24        | Router-to-router communication      |
-| Office Network   | 192.168.10.0/24    | HR, IT, Finance departments         |
+| Office Network   | 192.168.10.0/24    | Internal office network             |
 | Admin Network    | 192.168.20.0/24    | Secure admin systems                |
 | Customer Network | 192.168.50.0/24    | DHCP-based external users           |
 
 🚪 Default Gateways
 
-- Office Network → 192.168.10.1
-- Admin Network → 192.168.20.1
-- Customer Network → 192.168.50.1
-
-  
-----
-
-## 📷 Network Topology
-
-The following diagram represents the overall network structure, including core, edge, and segmented networks.
-
-![Topology](screenshots/topology.png)
-
----
-
-## 🔄 Data Flow
-
-The communication flow in the network is as follows:
-
-### Office Users
-PC → Core Switch → Core Router → Edge Router → Internet  
-
-### Customer Users
-Device → Switch → Edge Router → Internet  
-
-### Admin Network
-Admin → Core Router → All Networks  
-
-### Firewall Behavior
-- Office/Customer → Admin ❌ Blocked  
-- Admin → All Networks ✅ Allowed
+- Office Network → 192.168.10.1  
+- Admin Network → 192.168.20.1  
+- Customer Network → 192.168.50.1  
 
 ---
 
@@ -98,23 +89,31 @@ Admin → Core Router → All Networks
 
 This project includes several core networking features:
 
-- Static IP Addressing
-  Used for office and admin devices to ensure consistent connectivity
+- Static IP Addressing  
+  Used for office and admin devices to ensure consistent connectivity  
 
-- DHCP Configuration
-  Automatically assigns IP addresses to customer devices
+- DHCP Configuration  
+  Automatically assigns IP addresses to customer devices  
 
-- NAT (Network Address Translation)
-  Enables internal devices to access external networks (Internet simulation)
+- NAT (Network Address Translation)  
+  Enables internal devices to access external networks (Internet simulation)  
 
-- Static Routing
-  Configured between routers for inter-network communication
+- Static Routing  
+  Configured between routers for inter-network communication  
 
-- Firewall using Extended ACL
-  Controls traffic flow and enforces security policies
+- Firewall using Extended ACL  
+  Controls traffic flow and enforces security policies  
 
-- Network Segmentation
-  Separates networks to improve performance and security
+- Network Segmentation  
+  Separates networks to improve performance and security  
+
+---
+
+🧠 Design Note
+
+The admin network is directly connected to the core router to simplify security control and clearly enforce ACL-based restrictions.
+
+In real-world environments, the admin network would typically be connected through a switch for scalability.
 
 ---
 
@@ -124,10 +123,10 @@ Firewall functionality is implemented using extended Access Control Lists (ACLs)
 
 🔒 Security Rules
 
-- Admin network has full access to all networks
-- Office and customer networks are restricted from accessing admin network
-- Unauthorized traffic is blocked at the router level
-- ACLs are applied on interfaces to control inbound traffic
+- Admin network has full access to all networks  
+- Office and customer networks are restricted from accessing admin network  
+- Unauthorized traffic is blocked at the router level  
+- ACLs are applied on interfaces to control inbound traffic  
 
 This ensures that sensitive systems remain protected while maintaining necessary communication.
 
@@ -139,46 +138,44 @@ The network was tested to validate connectivity, security, and functionality.
 
 ✅ Internal Communication
 
-All office devices successfully communicate with each other
-Example: HR → IT → FIN
+All office devices successfully communicate with each other  
 
-Screenshot: "network-working.png"
+Screenshot: network-working.png  
 
 ---
 
 🚫 Firewall Block (Unauthorized Access)
 
-Attempts to access the admin network from other networks are blocked
-Displays: “Communication administratively prohibited”
+Attempts to access the admin network from other networks are blocked  
+Displays: “Communication administratively prohibited”  
 
-Screenshots:
-
-- "firewall-block-test.png"
-- "firewall-block-hr.png"
+Screenshots:  
+- firewall-block-test.png  
+- firewall-block-hr.png  
 
 ---
 
 ✅ Firewall Allow (Admin Access)
 
-Admin network can access all other networks without restriction
+Admin network can access all other networks without restriction  
 
-Screenshot: "firewall-allow-test.png"
+Screenshot: firewall-allow-test.png  
 
 ---
 
 🌍 Internet Access (NAT)
 
-Internal devices can access external IP (e.g., 8.8.8.8) using NAT
+Internal devices can access external IP (e.g., 8.8.8.8) using NAT  
 
-Screenshot: "internet-access-NAT.png"
+Screenshot: internet-access-NAT.png  
 
 ---
 
 📡 DHCP Verification
 
-Customer devices receive IP addresses dynamically
+Customer devices receive IP addresses dynamically  
 
-Screenshot: "dhcp-auto-assignment.png"
+Screenshot: dhcp-auto-assignment.png  
 
 ---
 
@@ -199,28 +196,28 @@ enterprise-office-network-gns3/
 
 Due to size limitations, the project is hosted externally.
 
-👉 Download here:
-https://drive.google.com/file/d/1mlkhLAarYJyHyTNzjELdpsSS7sZZXd11/view?usp=sharing
+👉 Download here:  
+https://drive.google.com/file/d/1mlkhLAarYJyHyTNzjELdpsSS7sZZXd11/view?usp=sharing  
 
 ---
 
 🚀 How to Run the Project
 
-1. Install GNS3 and VirtualBox
-2. Import Cisco 7200 router image
-3. Download the project file
-4. Open it in GNS3
-5. Start all devices
-6. Verify connectivity using ping commands
+1. Install GNS3 and VirtualBox  
+2. Import Cisco 7200 router image  
+3. Download the project file  
+4. Open it in GNS3  
+5. Start all devices  
+6. Verify connectivity using ping commands  
 
 ---
 
 🛠️ Technologies Used
 
-- GNS3 (Network Simulation Tool)
-- Cisco 7200 Router (Core, Edge, Firewall roles)
-- VPCS (Virtual PC Simulator)
-- VirtualBox
+- GNS3 (Network Simulation Tool)  
+- Cisco 7200 Router (Core, Edge, Firewall roles)  
+- VPCS (Virtual PC Simulator)  
+- VirtualBox  
 
 ---
 
@@ -228,22 +225,21 @@ https://drive.google.com/file/d/1mlkhLAarYJyHyTNzjELdpsSS7sZZXd11/view?usp=shari
 
 Through this project, the following skills were developed:
 
-- Enterprise network design fundamentals
-- Routing and NAT configuration
-- Firewall implementation using ACL
-- DHCP setup and troubleshooting
-- Network segmentation and security practices
+- Enterprise network design fundamentals  
+- Routing and NAT configuration  
+- Firewall implementation using ACL  
+- DHCP setup and troubleshooting  
+- Network segmentation and security practices  
 
 ---
 
 👨‍💻 Author
 
-Ananthu K Santhosh
-BCA Student | Cyber Security & Networking Enthusiast
+Ananthu K Santhosh  
+BCA Student | Cyber Security & Networking Enthusiast  
 
 ---
 
 ⭐ Conclusion
 
-This project demonstrates a practical implementation of an enterprise network with secure communication, controlled access, and internet connectivity.
-It reflects hands-on experience with real-world networking concepts using GNS3 and Cisco devices.
+This project demonstrates a practical implementation of an enterprise network with secure communication, controlled access, and internet connectivity. It reflects hands-on experience with real-world networking concepts using GNS3 and Cisco devices
