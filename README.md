@@ -209,7 +209,7 @@ Through this project, the following skills were developed:
 👨‍💻 Author
 
 Ananthu K Santhosh
-BCA Student | Aspiring Full Stack Developer & Cybersecurity Enthusiast
+BCA Student | Cyber Security & Networking Enthusiast
 
 ---
 
