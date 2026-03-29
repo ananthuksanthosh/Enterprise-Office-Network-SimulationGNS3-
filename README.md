@@ -23,12 +23,14 @@ This project simulates a small enterprise network with multiple departments and 
 
 🌐 IP Addressing Scheme
 
-Network| Subnet| Description
-Core ↔ Edge Link| 10.0.0.0/24| Router-to-router communication
-Office Network| 192.168.10.0/24| HR, IT, Finance departments
-Admin Network| 192.168.20.0/24| Secure admin systems
-Customer Network| 192.168.50.0/24| DHCP-based external users
+## 🌐 IP Addressing Scheme
 
+| Network            | Subnet              | Description                         |
+|------------------|--------------------|-------------------------------------|
+| Core ↔ Edge Link | 10.0.0.0/24        | Router-to-router communication      |
+| Office Network   | 192.168.10.0/24    | HR, IT, Finance departments         |
+| Admin Network    | 192.168.20.0/24    | Secure admin systems                |
+| Customer Network | 192.168.50.0/24    | DHCP-based external users           |
 🚪 Default Gateways
 
 - Office Network: 192.168.10.1
