@@ -64,7 +64,17 @@ The network is divided into logical subnets for scalability and security.
 - Admin Network → 192.168.20.1
 - Customer Network → 192.168.50.1
 
+  
+----
+
+## 📷 Network Topology
+
+The following diagram represents the overall network structure, including core, edge, and segmented networks.
+
+![Topology](screenshots/topology.png)
+
 ---
+
 
 ⚙️ Features Implemented
 
